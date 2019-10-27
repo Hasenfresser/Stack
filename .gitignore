@@ -42,6 +42,10 @@
 *.idb
 *.pdb
 
+# Doxygen generated files
+html/
+latex/
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
