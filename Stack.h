@@ -3,7 +3,7 @@
  * @author Hasenfresser
  * @date 2019-10-27
  *
- * @brief Header file of all Stack functions, enums and structs.
+ * @brief Header file of all Stack functions and structs.
  *
  * This is a low level implementation of a Stack in C programming language.
  * Every Stack can be initialized with a specific element size, therefore any data type can be stored as a stack.
@@ -20,7 +20,7 @@
 #include <string.h>
 
 /**
- * @brief Struct for single element in Stack.
+ * @brief Struct for single element (Node) in Stack.
  */
 typedef struct Node
 {
@@ -34,15 +34,18 @@ typedef struct Node
 typedef struct Stack
 {
     size_t m_tSize; /**< Byte size of each element in Stack */
+    size_t m_tMax; /**< Maximum number of elements (Nodes) in Stack */
+    size_t m_tElems; /**< Number of elements (Nodes) in Stack */
     Node *m_pFirst; /**< Pointer to first Node (element) in Stack */
 } Stack;
 
 /**
  * @brief Creates a new Stack with a specific element size
  * @param p_tSize: size_t with element size in stack
+ * @param p_tMax: Maximum number of elements (Nodes) in Stack, when set to zero Stack has no boundaries
  * @return Pointer to new Stack; when creation failed, pointer is zero
  */
-extern Stack *stackNew(const size_t p_tSize);
+extern Stack *stackNew(const size_t p_tSize, const size_t p_tMax);
 
 /**
  * @brief Checks if Stack is empty.
@@ -50,6 +53,13 @@ extern Stack *stackNew(const size_t p_tSize);
  * @return 1 when Stack is empty, 0 if Stack is not empty, -1 if p_pStack is zero pointer
  */
 extern int stackIsEmpty(Stack *const p_pStack);
+
+/**
+ * @brief Checks if Stack is full.
+ * @param p_pStack: Pointer to actual Stack.
+ * @return 1 when Stack is full, 0 if Stack is not full, -1 if p_pStack is zero pointer
+ */
+extern int stackIsFull(Stack *const p_pStack);
 
 /**
  * @brief Returns top element of the Stack.
@@ -64,6 +74,7 @@ extern void *stackTop(Stack *const p_pStack);
  * @param p_pData: pointer to new element (Node) data
  *
  * If any parameter pointer is zero, the function will do nothing.
+ * If Stack reached its maximum number of elements, the function will do nothing.
  */
 extern void stackPush(Stack *const p_pStack, void *const p_pData);
 

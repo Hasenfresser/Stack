@@ -7,14 +7,17 @@
  */
 
 #include "Stack.h"
+#include <stdio.h>
 
-Stack *stackNew(const size_t p_tSize) {
-    Stack *pStack = calloc(1, sizeof(Stack));
+Stack *stackNew(const size_t p_tSize, const size_t p_tMax) {
+    Stack *pStack = malloc(sizeof(Stack));
 
     if(!pStack) return 0;
 
     pStack->m_pFirst = 0;
     pStack->m_tSize = p_tSize;
+    pStack->m_tMax = p_tMax;
+    pStack->m_tElems = 0;
 
     return pStack;
 }
@@ -25,6 +28,12 @@ int stackIsEmpty(Stack *const p_pStack) {
     return (!p_pStack->m_pFirst);
 }
 
+int stackIsFull(Stack *const p_pStack) {
+    if(!p_pStack)   return -1;
+
+    return (p_pStack->m_tMax && p_pStack->m_tMax == p_pStack->m_tElems);
+}
+
 void *stackTop(Stack *const p_pStack) {
     if(!p_pStack || !p_pStack->m_pFirst)    return 0;
 
@@ -32,7 +41,7 @@ void *stackTop(Stack *const p_pStack) {
 }
 
 void stackPush(Stack *const p_pStack, void *const p_pData) {
-    if(!p_pStack || !p_pData)   return;
+    if(!p_pStack || !p_pData || ( p_pStack->m_tMax && p_pStack->m_tElems == p_pStack->m_tMax))   return;
 
     Node *pNode = malloc(sizeof(Node));
 
@@ -52,6 +61,8 @@ void stackPush(Stack *const p_pStack, void *const p_pData) {
         pNode->m_pNext = p_pStack->m_pFirst;
         p_pStack->m_pFirst = pNode;
     }
+
+    ++p_pStack->m_tElems;
 }
 
 void stackPop(Stack *const p_pStack) {
@@ -63,25 +74,18 @@ void stackPop(Stack *const p_pStack) {
 
     free(pNode->m_pData);
     free(pNode);
+
+    --p_pStack->m_tElems;
 }
 
 void stackClear(Stack *const p_pStack) {
     if(!p_pStack)   return;
 
-    while(!stackIsEmpty(p_pStack)) stackPop(p_pStack);
+    while(!stackIsEmpty(p_pStack))  stackPop(p_pStack);
 }
 
 size_t stackSize(Stack *const p_pStack) {
     if(!p_pStack)   return 0;
 
-    Node *pTmp = p_pStack->m_pFirst;
-
-    size_t tSize = 0;
-
-    while(pTmp) {
-        pTmp = pTmp->m_pNext;
-        ++tSize;
-    }
-
-    return tSize;
+    return p_pStack->m_tElems;
 }
