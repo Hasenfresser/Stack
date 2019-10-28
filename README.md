@@ -179,7 +179,7 @@ If the Stack pointer is empty, it will return `-1`.
 
 ## Misc
 - This implementation tries to make **C** programming a little bit easier, but is also some kind of low level. So don't expect to much comfort while using it. It is recommended to check everything twice before releasing something. Empty pointers can easily become dangerous! :stuck_out_tongue_winking_eye:
-- It is **not** recommended to use this implelentation in **C++**, because it has its own class for [Stacks](http://www.cplusplus.com/reference/stack/stack/). It can also be used for objects, which is a great advantage.
+- It is **not** recommended to use this implementation in **C++** (only if it has to be very perfomant with simple data types=), because it has its own class for [Stacks](http://www.cplusplus.com/reference/stack/stack/). It can also be used for objects and their constructors, which is a great advantage.
 
 ## ToDos
 
