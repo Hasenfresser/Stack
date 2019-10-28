@@ -9,14 +9,14 @@
 #include "Stack.h"
 #include <stdio.h>
 
-Stack *stackNew(const size_t p_tSize, const size_t p_tMax) {
+Stack *stackNew(const size_t p_tSize) {
     Stack *pStack = malloc(sizeof(Stack));
 
     if(!pStack) return 0;
 
     pStack->m_pFirst = 0;
     pStack->m_tSize = p_tSize;
-    pStack->m_tMax = p_tMax;
+    pStack->m_tMax = 0;
     pStack->m_tElems = 0;
 
     return pStack;

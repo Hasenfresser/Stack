@@ -42,10 +42,9 @@ typedef struct Stack
 /**
  * @brief Creates a new Stack with a specific element size
  * @param p_tSize: size_t with element size in stack
- * @param p_tMax: Maximum number of elements (Nodes) in Stack, when set to zero Stack has no boundaries
  * @return Pointer to new Stack; when creation failed, pointer is zero
  */
-extern Stack *stackNew(const size_t p_tSize, const size_t p_tMax);
+extern Stack *stackNew(const size_t p_tSize);
 
 /**
  * @brief Checks if Stack is empty.
