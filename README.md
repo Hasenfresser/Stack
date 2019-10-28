@@ -35,13 +35,13 @@ Just copy the *Stack.c* and *Stack.h* into your project folder and include *Stac
 
 ### Creating new Stack
 
-*Example 1:* Creating a Stack of `int`:
+*Example 1:* Creating a Stack of `double`:
 ```
-Stack *pdStack = newStack(sizeof(int));
+Stack *pdStack = newStack(sizeof(double));
 ```
 
 
-*Example 2:* Creating a Stack of `double`:
+*Example 2:* Creating a Stack of `int`:
 ```
 Stack *piStack = newStack(sizeof(int));
 ```
