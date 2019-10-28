@@ -21,18 +21,22 @@ This C implementation of a stack is **not** fixed to a specific data type which 
 
 Just copy the *Stack.c* and *Stack.h* into your project folder and include *Stack.h* in your source code.
 
-`#include "<optional_path/>Stack.h"`
+```
+#include "<optional_path/>Stack.h"
+```
 
 ### Creating new Stack
 
 *Example 1:* Creating a Stack of `int`:
-
-`Stack *pdStack = newStack(sizeof(int));`
+```
+Stack *pdStack = newStack(sizeof(int));
+```
 
 
 *Example 2:* Creating a Stack of `double`:
-
-`Stack *piStack = newStack(sizeof(int));`
+```
+Stack *piStack = newStack(sizeof(int));
+```
 
 The function `Stack *newStack(const size_t p_tSize)` gets a byte size as parameter. It is usefull to get the byte size of an element by using `sizeof`.
 The function returns a pointer to the newly created Stack.
@@ -50,12 +54,14 @@ After creating a new Stack, you can edit the maximum number of elements.
 
 This sets the maximum number of elements in the Stack to `5`.
 If the maximum number of elements is reached, no new elements can be *pushed*.
-
-`pdStack->m_tMax = 5;`
+```
+pdStack->m_tMax = 5;
+```
 
 *Example 2:* Set number of `int` elements in Stack to infinite:
-
-`piStack->m_tMax = 0;`
+```
+piStack->m_tMax = 0;
+```
 
  If set to `0`, the stack can contain an infinte number of elements (theoretically).
 
@@ -89,16 +95,19 @@ If any argument is an empty pointer, the function will do nothing.
 ### Getting top element of Stack
 
 *Example 1:* Getting top `double` element of Stack in `double dTop`:
-
-`double dTop = *(double *)stackTop(pdStack);`
+```
+double dTop = *(double *)stackTop(pdStack);
+```
 
 *Example 2:* Saving top `int` element of Stack in `int iTop`:
-
-`int iTop = *(int *)stackTop(piStack);`
+```
+int iTop = *(int *)stackTop(piStack);
+```
 
 *Example 3:* Saving top `int` element of Stack in `void pointer`:
-
- `void *p = stackTop(piStack);`
+```
+void *p = stackTop(piStack);
+```
 
 The function `void *stackTop(Stack *const p_pStack)` gets the Stack pointer as argument.
 
@@ -109,8 +118,9 @@ If the Stack pointer or the Stack itself is empty (contains 0 elements) the func
 ### Popping top element of Stack
 
 *Example 1:* Popping top `double` element of Stack:
-
-`stackTop(pdStack);`
+```
+stackTop(pdStack);
+```
 
 The function `void stackPop(Stack *const p_pStack)` gets the Stack pointer as argument.
 
@@ -122,8 +132,9 @@ If the Stack pointer is empty, the function will do nothing.
 ### Clearing Stack
 
 *Example 1:* Clearing all `double` elements in Stack:
-
-`stackClear(pdStack);`
+```
+stackClear(pdStack);
+```
 
 The function `void stackClear(Stack *const p_pStack)` gets the Stack pointer as argument.
 
@@ -135,8 +146,9 @@ If the Stack pointer is empty, the function will do nothing.
 ### Stack flags
 
 *Example 1:* Check if `int` Stack is empty
-
-`int iEmpty = stackIsEmpty(piStack);`
+```
+int iEmpty = stackIsEmpty(piStack);
+```
 
 The function `void stackIsEmpty(Stack *const p_pStack)` gets the Stack pointer as argument.
 
