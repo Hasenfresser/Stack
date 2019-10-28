@@ -146,7 +146,7 @@ stackClear(pdStack);
 
 The function `void stackClear(Stack *const p_pStack)` gets the Stack pointer as argument.
 
-It will repetitive delete the top element of the Stack until it is empty.
+It will repetitively delete the top element of the Stack until it is empty.
 
 If the Stack pointer is empty, the function will do nothing.
 
@@ -188,9 +188,10 @@ If the Stack pointer is empty, it will return `-1`.
 - :white_check_mark: Adding full flag
 - :white_check_mark: Adding Doxygen comments and config file
 - :white_check_mark: Completing ReadMe.md
+- :white_check_mark: Some more code documentation in *Stack.c* 
 
-- :negative_squared_cross_mark: Some more code documentation in *Stack.c* 
 - :negative_squared_cross_mark: Getting some feedback 
+- :negative_squared_cross_mark: improving memory allocation with combination of next and data pointer (getting rid of Node struct)
 
 ## Bugs and Issues
 
