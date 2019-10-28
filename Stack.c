@@ -2,6 +2,7 @@
  * @file Stack.c
  * @author Hasenfresser
  * @date 2019-10-27
+ * @version 1.0.0
  *
  * @brief Source file of all Stack functions.
  */

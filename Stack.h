@@ -2,6 +2,7 @@
  * @file Stack.h
  * @author Hasenfresser
  * @date 2019-10-27
+ * @version 1.0.0
  *
  * @brief Header file of all Stack functions and structs.
  *
