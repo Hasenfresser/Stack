@@ -1,10 +1,10 @@
 /**
  * @file Stack.h
  * @author Hasenfresser
- * @date 2019-10-27
- * @version 1.0.0
+ * @date 2019-10-28
+ * @version 1.0.1
  *
- * @brief Header file of all Stack functions and structs.
+ * @brief Header file of all Stack functions and structures.
  *
  * This is a low level implementation of a Stack in C programming language.
  * Every Stack can be initialized with a specific element size, therefore any data type can be stored as a stack.
@@ -23,8 +23,7 @@
 /**
  * @brief Struct for single element (Node) in Stack.
  */
-typedef struct Node
-{
+typedef struct Node {
     void *m_pData; /**< void pointer to element data */
     struct Node *m_pNext; /**< pointer to next Node (element) */
 } Node;
@@ -32,8 +31,7 @@ typedef struct Node
 /**
  * @brief Struct for Stack. Pointer to this is used as the actual stack in the program.
  */
-typedef struct Stack
-{
+typedef struct Stack {
     size_t m_tSize; /**< Byte size of each element in Stack */
     size_t m_tMax; /**< Maximum number of elements (Nodes) in Stack */
     size_t m_tElems; /**< Number of elements (Nodes) in Stack */

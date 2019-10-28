@@ -3,7 +3,11 @@ A low level implementation in **C** of a stack container. Can be filled with nea
 
 ## Version
 
-Version **[1.0.0 (Virgin)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.0)** released!
+Version **[1.0.1 (Newby)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.1)** released!
+
+#### Older versions:
+
+- [1.0.0 (Virgin)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.0)
 
 
 ## What's a Stack?
