@@ -10,7 +10,8 @@ New elements are *pushed* on top of the stack, while a *pop* deletes the top ele
 Most Stacks have also some functionalities like a *maximum size*, a *clear* function (deleting all elements) or a check if stack is *full* or *empty*.
 
 ![StackVisu](https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png)
-Grapical visualization of a Stack.
+
+Graphical visualization of a Stack.
 *Source: https://upload.wikimedia.org/wikipedia/commons/b/b4/Lifo_stack.png*
 
 
@@ -168,7 +169,8 @@ If the Stack pointer is empty, it will return `-1`.
 - :white_check_mark: Adding Doxygen comments and config file
 - :white_check_mark: Completing ReadMe.md
 
-- :negative_squared_cross_mark: getting some feedback 
+- :negative_squared_cross_mark: Some more code documentation in *Stack.c* 
+- :negative_squared_cross_mark: Getting some feedback 
 
 ## Bugs and Issues
 
