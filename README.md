@@ -1,6 +1,10 @@
 # Stack
 A low level implementation in **C** of a stack container. Can be filled with nearly any data type.
 
+## Version
+
+Version **[1.0.0 (Virgin)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.0)** released!
+
 
 ## What's a Stack?
 A Stack is a dynamic data container. It can store an (theoretically) infinite or a specific number elements of the same data type.
