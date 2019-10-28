@@ -31,7 +31,7 @@ int stackIsEmpty(Stack *const p_pStack) {
 int stackIsFull(Stack *const p_pStack) {
     if(!p_pStack)   return -1;
 
-    return (p_pStack->m_tMax && p_pStack->m_tMax == p_pStack->m_tElems);
+    return (p_pStack->m_tMax && p_pStack->m_tMax >= p_pStack->m_tElems);
 }
 
 void *stackTop(Stack *const p_pStack) {
@@ -41,7 +41,7 @@ void *stackTop(Stack *const p_pStack) {
 }
 
 void stackPush(Stack *const p_pStack, void *const p_pData) {
-    if(!p_pStack || !p_pData || ( p_pStack->m_tMax && p_pStack->m_tElems == p_pStack->m_tMax))   return;
+    if(!p_pStack || !p_pData || ( p_pStack->m_tMax && p_pStack->m_tElems >= p_pStack->m_tMax))   return;
 
     Node *pNode = malloc(sizeof(Node));
 
@@ -82,10 +82,4 @@ void stackClear(Stack *const p_pStack) {
     if(!p_pStack)   return;
 
     while(!stackIsEmpty(p_pStack))  stackPop(p_pStack);
-}
-
-size_t stackSize(Stack *const p_pStack) {
-    if(!p_pStack)   return 0;
-
-    return p_pStack->m_tElems;
 }

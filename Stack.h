@@ -94,11 +94,4 @@ extern void stackPop(Stack *const p_pStack);
  */
 extern void stackClear(Stack *const p_pStack);
 
-/**
- * @brief Returns number of elements (Nodes) in Stack.
- * @param p_pStack: pointer to actual Stack
- * @return Number of elements (Nodes), if p_pStack is zero, return is also zero.
- */
-extern size_t stackSize(Stack *const p_pStack);
-
 #endif // STACK_H
