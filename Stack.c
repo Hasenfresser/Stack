@@ -1,8 +1,8 @@
 /**
  * @file Stack.c
  * @author Hasenfresser
- * @date 2019-10-28
- * @version 1.0.1
+ * @date 2019-10-29
+ * @version 1.0.2
  *
  * @brief Source file of all Stack functions.
  */
@@ -56,13 +56,13 @@ void stackPush(Stack *const p_pStack, void *const p_pData) {
     if(!p_pStack || !p_pData || stackIsFull(p_pStack))   return;
 
     // allocating memory for new Node
-    Node *pNode = malloc(sizeof(Node));
+    Node *pNode = calloc(1, sizeof(Node));
 
     // check allocation, return if failed
     if(!pNode)  return;
 
     // allocating memory for data in new Node
-    pNode->m_pData = malloc(p_pStack->m_tSize);
+    pNode->m_pData = calloc(1, p_pStack->m_tSize);
 
     // check allocation, return if failed
     if(!pNode->m_pData) return;
@@ -71,9 +71,7 @@ void stackPush(Stack *const p_pStack, void *const p_pData) {
     memcpy(pNode->m_pData, p_pData, p_pStack->m_tSize);
 
     // if stack is empty, new element has no successor
-    if(!p_pStack->m_pFirst) pNode->m_pNext = 0;
-    // otherwise set "old" first element as successor of new element
-    else                    pNode->m_pNext = p_pStack->m_pFirst;
+    if(lp_pStack->m_pFirst) pNode->m_pNext = p_pStack->m_pFirst;
 
     // set new element as "new" first element of Stack
     p_pStack->m_pFirst = pNode;

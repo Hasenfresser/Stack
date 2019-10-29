@@ -3,10 +3,11 @@ A low level implementation in **C** of a stack container. Can be filled with nea
 
 ## Version
 
-Version **[1.0.1 (Newby)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.1)** released!
+Version **[1.0.2 (Novice)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.2)** released!
 
 #### Older versions:
 
+- [1.0.1 (Newby)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.1)
 - [1.0.0 (Virgin)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.0)
 
 
@@ -191,7 +192,6 @@ If the Stack pointer is empty, it will return `-1`.
 - :white_check_mark: Some more code documentation in *Stack.c* 
 
 - :negative_squared_cross_mark: Getting some feedback 
-- :negative_squared_cross_mark: improving memory allocation with combination of next and data pointer (getting rid of Node struct)
 
 ## Bugs and Issues
 
