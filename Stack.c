@@ -2,7 +2,7 @@
  * @file Stack.c
  * @author Hasenfresser
  * @date 2019-10-29
- * @version 1.0.2
+ * @version 1.0.3 (Rookie)
  *
  * @brief Source file of all Stack functions.
  */
@@ -71,7 +71,7 @@ void stackPush(Stack *const p_pStack, void *const p_pData) {
     memcpy(pNode->m_pData, p_pData, p_pStack->m_tSize);
 
     // if stack is empty, new element has no successor
-    if(lp_pStack->m_pFirst) pNode->m_pNext = p_pStack->m_pFirst;
+    if(p_pStack->m_pFirst) pNode->m_pNext = p_pStack->m_pFirst;
 
     // set new element as "new" first element of Stack
     p_pStack->m_pFirst = pNode;
