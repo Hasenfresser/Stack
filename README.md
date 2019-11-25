@@ -3,10 +3,11 @@ A low level implementation in **C** of a stack container. Can be filled with nea
 
 ## Version
 
-Version **[1.0.3 (Rookie)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.3)** released!
+Version **[1.0.4 (Amateur)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.4)** released!
 
 #### Older versions:
 
+- [1.0.3 (Rookie)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.3)
 - [1.0.2 (Novice)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.2)
 - [1.0.1 (Newby)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.1)
 - [1.0.0 (Virgin)](https://github.com/Hasenfresser/Stack/releases/tag/1.0.0)
@@ -42,7 +43,6 @@ Just copy the *Stack.c* and *Stack.h* into your project folder and include *Stac
 Stack *pdStack = newStack(sizeof(double));
 ```
 
-
 *Example 2:* Creating a Stack of `int`:
 ```
 Stack *piStack = newStack(sizeof(int));
@@ -53,8 +53,16 @@ The function returns a pointer to the newly created Stack.
 
 A newly created Stack can store an infinite amount of elements. You can change this later.
 
-If anything goes wrong while creating the Stack, the returned pointer is empty (`0`).
+If anything goes wrong while creating the Stack, the returned pointer is zero (`0`).
 
+*Alternative:* Creating a local Stack of `char` with maximum of `5` elements:
+```
+Stack cStack = { sizeof(char), 5, 0, 0 };
+```
+
+This method does not need the function `newStack`. You can declare the Stack struct directly. Make sure not to mess up the parameters. The last two should always be initialized with `0`.
+An explanation for all Stack struct members will follow.
+For all other functions you will have to use `&cStack` instead of just using the Stack pointer itself.
 
 ### Stack maximum
 
@@ -87,24 +95,30 @@ double d = 4.5;
 stackPush(pdStack, &d);
 ```
 
-*Example 2:* Pushing new `int` onto Stack:
+*Example 2:* Pushing new `int` onto Stack and storing return value in integer for later evaluation:
 
 ```
 int i = -4;
-stackPush(piStack, &i);
+int iRet = stackPush(piStack, &i);
+
+if(iRet == STACK_FULL) {
+// error handling ...
+    
 ```
 
-The function `void stackPush(Stack *const p_pStack, void *const p_pData)` gets the Stack pointer as argument. 
+The function `int stackPush(Stack *const p_pStack, void *const p_pData)` gets the Stack pointer as argument. 
 
-The second argument contains a void pointer to the actual data. Therefore the data could be anything. **Make sure** that the data the pointer is referencing to has the correct data type - there is no actual check if the this is correct!
+The second argument contains a void pointer to the actual data. Therefore the data could be anything. **Make sure** that the data the pointer is referencing to has the correct byte size - there is no actual check if this is correct!
 If the pushed data is bigger than the single element byte size, it will **not** be properly stored!
 
-If any argument is an empty pointer, the function will do nothing.
+If any argument is an empty pointer, the function will return `STACK_ZP` (`-1`).
+If the Stack is full, it will not push anything and returns `STACK_FULL` (`-2`).
+If there is an error while allocating memory for the new element, the funtion returns `STACK_BADMAL` (`-3`).
 
 
 ### Getting top element of Stack
 
-*Example 1:* Getting top `double` element of Stack in `double dTop`:
+*Example 1:* Saving top `double` element of Stack in `double dTop`:
 ```
 double dTop = *(double *)stackTop(pdStack);
 ```
@@ -123,7 +137,7 @@ The function `void *stackTop(Stack *const p_pStack)` gets the Stack pointer as a
 
 It will return a pointer to the top element of the Stack. It can be stored in a void pointer or casted to a specific data type (which usually matches with the data type the Stack stores).
 
-If the Stack pointer or the Stack itself is empty (contains 0 elements) the function will return an empty pointer (`0`).
+If the Stack pointer or the Stack itself is empty (contains 0 elements) the function will return a zero pointer (`0`).
 
 ### Popping top element of Stack
 
@@ -132,11 +146,18 @@ If the Stack pointer or the Stack itself is empty (contains 0 elements) the func
 stackTop(pdStack);
 ```
 
-The function `void stackPop(Stack *const p_pStack)` gets the Stack pointer as argument.
+*Example 2:* Popping top `int` element of Stack and storing return value in integer for later evaluation:
+```
+int iRet = stackTop(pdStack);
 
-If Stack is not empty, it will delete the top element of the Stack.
+if(iRet == STACK_ZP) {
+// error handling
+```
 
-If the Stack pointer is empty, the function will do nothing.
+The function `int stackPop(Stack *const p_pStack)` gets the Stack pointer as argument.
+It will delete the top element of the Stack.
+
+If the Stack pointer is empty, the function will return `STACK_ZP` (`-1`).
 
 
 ### Clearing Stack
@@ -146,25 +167,34 @@ If the Stack pointer is empty, the function will do nothing.
 stackClear(pdStack);
 ```
 
-The function `void stackClear(Stack *const p_pStack)` gets the Stack pointer as argument.
+*Example 2:* Clearing all `int` elements in Stack and storing return value in integer for later evaluation:
+```
+int iRet = stackClear(pdStack);
 
-It will repetitively delete the top element of the Stack until it is empty.
+if(iRet > 5) {
+// handling when Stack had more than 5 elements...
+```
 
-If the Stack pointer is empty, the function will do nothing.
+The function `int stackClear(Stack *const p_pStack)` gets the Stack pointer as argument.
+It will repetitively delete the top element of the Stack until it is empty and returning the number of deleted elements.
+
+If the Stack pointer is empty, the function will return `STACK_ZP` (`-1`).
 
 
 ### Stack flags
 
 *Example 1:* Check if `int` Stack is empty
 ```
-int iEmpty = stackIsEmpty(piStack);
+int iREt = stackIsEmpty(piStack);
+
+if(iRet == 0) {
+// handling when Stack is empty...
 ```
 
-The function `void stackIsEmpty(Stack *const p_pStack)` gets the Stack pointer as argument.
+The function `int stackIsEmpty(Stack *const p_pStack)` gets the Stack pointer as argument.
 
 If the Stack stores no elements, it will return `0`, otherwise the number of stored elements.
-
-If the Stack pointer is empty, it will return `-1`.
+If the Stack pointer is empty, the function will return `STACK_ZP` (`-1`).
 
 *Example 2:* Check if `double` Stack with a maximum of `5` elements is full
 ```
@@ -173,15 +203,15 @@ pdStack->m_tMax = 5;
 int iEmpty = stackIsFull(pdStack);
 ```
 
-The function `void stackIsFull(Stack *const p_pStack)` gets the Stack pointer as argument.
+The function `int stackIsFull(Stack *const p_pStack)` gets the Stack pointer as argument.
 
 If the number of elements in the Stack equals or is bigger than the maximum, it will return `1`, otherwise `0`.
 If there is no maximum set (`0`), it will always return `0`.
-If the Stack pointer is empty, it will return `-1`.
+If the Stack pointer is empty, the function will return `STACK_ZP` (`-1`).
 
 ## Misc
 - This implementation tries to make **C** programming a little bit easier, but is also some kind of low level. So don't expect to much comfort while using it. It is recommended to check everything twice before releasing something. Empty pointers can easily become dangerous! :stuck_out_tongue_winking_eye:
-- It is **not** recommended to use this implementation in **C++** (only if it has to be very perfomant with simple data types), because it has its own class for [Stacks](http://www.cplusplus.com/reference/stack/stack/). It can also be used for objects and their constructors, which is a great advantage.
+- It is **not** recommended to use this implementation in **C++** (only if it has to be very perfomant with simple data types), because it has its own class for [Stacks](http://www.cplusplus.com/reference/stack/stack/). This can also be used for objects and their constructors, which is a great advantage.
 
 ## ToDos
 
@@ -191,6 +221,8 @@ If the Stack pointer is empty, it will return `-1`.
 - :white_check_mark: Adding Doxygen comments and config file
 - :white_check_mark: Completing ReadMe.md
 - :white_check_mark: Some more code documentation in *Stack.c* 
+- :white_check_mark: Return values
+- :white_check_mark: Error codes
 
 - :negative_squared_cross_mark: Getting some feedback 
 

@@ -1,8 +1,8 @@
 /**
  * @file Stack.h
  * @author Hasenfresser
- * @date 2019-10-29
- * @version 1.0.3 (Rookie)
+ * @date 2019-11-25
+ * @version 1.0.4 (Amateur)
  *
  * @brief Header file of all Stack functions and structures.
  *
@@ -21,12 +21,22 @@
 #include <string.h>
 
 /**
+ * @brief Enumeration with all error and init values.
+ */
+enum {
+    STACK_EMPTY = 0, /**< Initial value for Stack members */
+    STACK_ZP = -1, /**< error value if parameter is zero pointer */
+    STACK_BADMAL = -2, /**< error value if memory allocation failed */
+    STACK_FULL = -3 /**< error value if Stack is full (no push) */
+};
+
+/**
  * @brief Struct for single element (Node) in Stack.
  */
-typedef struct Node {
+typedef struct StackElem {
     void *m_pData; /**< void pointer to element data */
-    struct Node *m_pNext; /**< pointer to next Node (element) */
-} Node;
+    struct StackElem *m_pNext; /**< pointer to next element (Node) */
+} StackElem;
 
 /**
  * @brief Struct for Stack. Pointer to this is used as the actual stack in the program.
@@ -35,7 +45,7 @@ typedef struct Stack {
     size_t m_tSize; /**< Byte size of each element in Stack */
     size_t m_tMax; /**< Maximum number of elements (Nodes) in Stack */
     size_t m_tElems; /**< Number of elements (Nodes) in Stack */
-    Node *m_pFirst; /**< Pointer to first Node (element) in Stack */
+    StackElem *m_pFirst; /**< Pointer to first element (Node) in Stack */
 } Stack;
 
 /**
@@ -46,23 +56,29 @@ typedef struct Stack {
 extern Stack *stackNew(const size_t p_tSize);
 
 /**
- * @brief Checks if Stack is empty.
- * @param p_pStack: Pointer to actual Stack.
- * @return 1 when Stack is empty, 0 if Stack is not empty, -1 if p_pStack is zero pointer
+ * @brief Checks if Stack is empty
+ * @param p_pStack: Pointer to actual Stack
+ * @return 1 when Stack is empty, otherwise 0 or error value
+ *
+ * If Stack pointer is zero, the function returns STACK_ZP.
  */
 extern int stackIsEmpty(Stack *const p_pStack);
 
 /**
- * @brief Checks if Stack is full.
- * @param p_pStack: Pointer to actual Stack.
- * @return 1 when Stack is full, 0 if Stack is not full, -1 if p_pStack is zero pointer
+ * @brief Checks if Stack is full
+ * @param p_pStack: Pointer to actual Stack
+ * @return 1 when Stack is full otherwise 0 or error value
+ *
+ * If Stack pointer is zero, the function returns STACK_ZP.
  */
 extern int stackIsFull(Stack *const p_pStack);
 
 /**
- * @brief Returns top element of the Stack.
+ * @brief Returns top element of the Stack
  * @param p_pStack: Pointer to actual Stack
- * @return Pointer to top element in Stack, zero pointer if p_pStack is zero pointer
+ * @return Pointer to top element of Stack or error value
+ *
+ * If Stack pointer is zero, the function returns STACK_ZP.
  */
 extern void *stackTop(Stack *const p_pStack);
 
@@ -70,26 +86,30 @@ extern void *stackTop(Stack *const p_pStack);
  * @brief Pushes element onto Stack.
  * @param p_pStack: pointer to actual Stack
  * @param p_pData: pointer to new element (Node) data
+ * @return Number of bytes pushed or error value
  *
- * If any parameter pointer is zero, the function will do nothing.
- * If Stack reached its maximum number of elements, the function will do nothing.
+ * If any parameter pointer is zero, the function returns STACK_ZP.
+ * If something with memory allocation went wrong, the functions returns STACK_BADMAL.
+ * If Stack reached its maximum number of elements, the function returns 0.
  */
-extern void stackPush(Stack *const p_pStack, void *const p_pData);
+extern int stackPush(Stack *const p_pStack, void *const p_pData);
 
 /**
  * @brief Pops (deletes) top element of Stack.
  * @param p_pStack: pointer to actual Stack
+ * @return Number of bytes popped or error value
  *
- * If p_pStack is zero, the function will do nothing.
+ * If Stack pointer is zero, the function returns STACK_ZP.
  */
-extern void stackPop(Stack *const p_pStack);
+extern int stackPop(Stack *const p_pStack);
 
 /**
  * @brief Pops (deletes) all element of Stack.
  * @param p_pStack: pointer to actual Stack
- *
- * If p_pStack is zero, the function will do nothing.
+ * @return Number of elements deleted or error value
+
+ * If Stack pointer is zero, the function returns STACK_ZP.
  */
-extern void stackClear(Stack *const p_pStack);
+extern int stackClear(Stack *const p_pStack);
 
 #endif // STACK_H

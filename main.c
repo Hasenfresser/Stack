@@ -1,8 +1,8 @@
 /**
  * @file main.c
  * @author Hasenfresser
- * @date 2019-10-29
- * @version 1.0.3 (Rookie)
+ * @date 2019-11-25
+ * @version 1.0.4 (Amateur)
  *
  * @brief Main file for testing purposes
  *
@@ -38,19 +38,18 @@ int main(const int p_iArgC, char *p_apcArgV[]) {
 
         // iterate through all characters of input parameter
         while(*pcInput != '\0') {
-            printf("%c", *pcInput);
+            printf("%c, bytes pushed: %d\n", *pcInput, stackPush(pStack, pcInput));
             // Pushing each character onto Stack
-            stackPush(pStack, pcInput);
 
             ++pcInput;
         }
 
-        printf(" <-> ");
+        printf("##### REVERSE #####\n");
 
         // Printing top Element of Stack followed by popping until it's empty
         while(!stackIsEmpty(pStack)) {
-            printf("%c", *(char *)stackTop(pStack));
-            stackPop(pStack);
+            printf("%c, bytes popped: ", *(char *)stackTop(pStack));
+            printf("%d\n", stackPop(pStack));
         }
 
         printf("\n");
