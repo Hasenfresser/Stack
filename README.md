@@ -69,12 +69,13 @@ For all other functions you will have to use `&cStack` instead of just using the
 After creating a new Stack, you can edit the maximum number of elements.
 
 *Example 1:* Set number of `double` elements in Stack to `5`:
-
-This sets the maximum number of elements in the Stack to `5`.
-If the maximum number of elements is reached, no new elements can be *pushed*.
 ```
 pdStack->m_tMax = 5;
 ```
+
+This sets the maximum number of elements in the Stack to `5`.
+If the maximum number of elements is reached, no new elements can be *pushed*.
+
 
 *Example 2:* Set number of `int` elements in Stack to infinite:
 ```
@@ -224,6 +225,10 @@ If the Stack pointer is empty, the function will return `STACK_ZP` (`-1`).
 - :white_check_mark: Return values
 - :white_check_mark: Error codes
 
+- :negative_squared_cross_mark: Fixing some memory allocation problems
+- :negative_squared_cross_mark: Adding `attach` functionality
+- :negative_squared_cross_mark: Adding `duplicate` functionality
+- :negative_squared_cross_mark: Adding `replace` functionality
 - :negative_squared_cross_mark: Getting some feedback 
 
 ## Bugs and Issues
